@@ -18,14 +18,24 @@ if [[ ${BASH_SOURCE[0]} != "$0" ]]; then
 fi
 
 #######################################
-# Define Global Constant
+# Load Environment Variables
 #
-# Secondly, we determine the Bashdrop
-# directory.
+# Secondly, we need our environment
+# variables.
 #######################################
 
 BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 readonly BIN_DIR
+
+# shellcheck source=/dev/null
+source "${BIN_DIR}/env/dotenv.sh"
+
+#######################################
+# Define Global Constant
+#
+# Thirdly, we determine the Bashdrop
+# directory.
+#######################################
 
 # shellcheck source=/dev/null
 source "${BIN_DIR}/config/_config.sh"
