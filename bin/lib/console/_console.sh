@@ -7,6 +7,7 @@
 #######################################
 
 readonly CONSOLE_DEPENDENCIES=(
+  "input"
   "output"
   "progressbar"
 )
