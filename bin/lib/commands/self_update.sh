@@ -16,6 +16,7 @@
 #######################################
 function command::self_update() {
   local latest_tag
+  local question="Do you want to update ${APP_NAME} to the latest version?"
 
   if ! os::has_installed git; then
     console::error --margin-top --margin-bottom "Git is not installed!"
@@ -29,6 +30,10 @@ function command::self_update() {
       "latest version. Please installed Git via" \
       "$(ansi --bold --white --underline "${url}")."
 
+    exit 1
+  fi
+
+  if ! console::ask --message="${question}" --default=Y; then
     exit 1
   fi
 
