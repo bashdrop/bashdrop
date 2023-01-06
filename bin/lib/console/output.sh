@@ -61,10 +61,11 @@ function console::notice() {
 #   Writes message to stdout.
 #######################################
 function console::output() {
-  local arguments_list=("margin-bottom" "margin-top" "overwrite")
+  local arguments_list=("margin-bottom" "margin-top" "no-trailing" "overwrite")
   local margin_bottom=false
   local margin_top=false
   local message="${*}"
+  local no_trailing=false
   local overwrite=false
 
   while [ $# -gt 0 ]; do
@@ -85,7 +86,13 @@ function console::output() {
   fi
 
   if [[ "${overwrite}" == true ]]; then
-    echo -e "\r\033[1A\033[0K${message}"
+    if [[ "${no_trailing}" == false ]]; then
+      echo -e "\r\033[1A\033[0K${message}"
+    else
+      echo -e -n "\r\033[1A\033[0K${message} "
+    fi
+  elif [[ "${no_trailing}" == true ]]; then
+    echo -e -n "${message} "
   else
     echo -e "${message}"
   fi
@@ -93,6 +100,19 @@ function console::output() {
   if [[ "${margin_bottom}" == true ]]; then
     console::newline
   fi
+}
+
+#######################################
+# Output the question message.
+#
+# Arguments:
+#   Message
+#
+# Outputs:
+#   Writes message to stdout.
+#######################################
+function console::question() {
+  console::output --no-trailing "$(ansi --bold --color=11 QUESTION:)" "$@"
 }
 
 #######################################
