@@ -17,7 +17,27 @@ function filesystem::does_file_exists() {
 }
 
 #######################################
-# Get the file name from the path.
+# Get the file extension for the file.
+#
+# Arguments:
+#   file
+#
+# Outputs:
+#   File extension.
+#######################################
+function filesystem::file_extension() {
+  local file_name="${1}"
+
+  if [[ "${file_name}" == *"."* ]]; then
+    file_name="$(filesystem::file_name "${file_name}")"
+    echo "${file_name#*.}"
+  else
+    echo ""
+  fi
+}
+
+#######################################
+# Get the file name for the file.
 #
 # Arguments:
 #   path
@@ -27,4 +47,39 @@ function filesystem::does_file_exists() {
 #######################################
 function filesystem::file_name() {
   basename -- "${1}"
+}
+
+#######################################
+# Get the file path from the file.
+#
+# Arguments:
+#   path
+#
+# Outputs:
+#   The file name.
+#######################################
+function filesystem::file_path() {
+  local file_path
+
+  file_path="$(dirname "${1}")"
+
+  if [[ "${file_path}" == "." ]]; then
+    file_path="$(pwd)"
+  fi
+
+  echo "${file_path}"
+}
+
+#######################################
+# Check if the file is a remote file.
+#
+# Arguments:
+#   file
+#
+# Returns:
+#   0 if file is remote.
+#   1 if file is not remote.
+#######################################
+function filesystem::is_remote_file() {
+  [[ $1 =~ ^(http|https|git)(:\/\/|@) ]] && return 0 || return 1
 }
