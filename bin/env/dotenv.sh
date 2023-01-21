@@ -34,6 +34,8 @@ function dotenv::get() {
     shift
   done
 
+  unset arguments_list
+
   if [ -f "${file}" ]; then
     # Strip out whitespaces
     variable="${variable//[[:blank:]]/}"

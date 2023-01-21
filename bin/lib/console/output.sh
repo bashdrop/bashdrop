@@ -81,6 +81,8 @@ function console::output() {
     shift
   done
 
+  unset arguments_list
+
   if [[ "${margin_top}" == true ]]; then
     console::newline
   fi

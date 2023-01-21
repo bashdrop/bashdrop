@@ -32,6 +32,8 @@ function help::add_command() {
     shift
   done
 
+  unset arguments_list
+
   if [ ${#command} -gt "${HELP_COMMAND_TEXT_MAX_LENGTH}" ]; then
     help::set_command_text_max_length ${#command}
   fi
@@ -68,6 +70,8 @@ function help::contribute() {
 
     shift
   done
+
+  unset arguments_list
 
   console::output \
     "- Star or contribute to ${package_name}:"
@@ -136,6 +140,8 @@ function help::display_usage() {
     shift
   done
 
+  unset arguments_list
+
   if [[ "${has_arguments}" == true ]]; then
     extras+=("[arguments]")
   fi
@@ -174,6 +180,8 @@ function help::display_useful_tips() {
 
     shift
   done
+
+  unset arguments_list
 
   console::output --margin-top "More configuration info:" \
     "$(ansi --bold --white "${command_name} help [command]")"

@@ -38,6 +38,8 @@ function console::ask() {
     shift
   done
 
+  unset arguments_list
+
   case "${default}" in
     'Y')
       prompt='Y/n'

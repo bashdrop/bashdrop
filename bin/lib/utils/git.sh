@@ -63,6 +63,8 @@ function git::checkout() {
     shift
   done
 
+  unset arguments_list
+
   command=$( cd "${dir}" && git checkout "${branch}" 2>&1 )
 
   [[ -n $command ]] && return 1 || return 0
@@ -158,6 +160,8 @@ function git::tag_timestamp() {
 
     shift
   done
+
+  unset arguments_list
 
   if filesystem::does_directory_exists "${dir}/.git"; then
     console::output "$( cd "${dir}" && git log -1 --format=%ai "${tag}" )"

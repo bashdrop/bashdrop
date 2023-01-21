@@ -27,6 +27,8 @@ function filesystem::create_symlink() {
     shift
   done
 
+  unset arguments_list
+
   # If path is working directory, rebuild full path.
   original_file_path="$(filesystem::file_path "${original}")"
   original_file_name="$(filesystem::file_name "${original}")"
