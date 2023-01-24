@@ -43,3 +43,27 @@ function symlink::create() {
 
   ln -s "${original}" "${link}"
 }
+
+#######################################
+# Remove the Symbolic Link.
+#
+# Arguments:
+#   link
+#######################################
+function symlink::remove() {
+  unlink "${1}"
+}
+
+#######################################
+# Check if the Symbolic Link is valid.
+#
+# Arguments:
+#   link
+#
+# Returns:
+#   0 if the symbolic link is valid.
+#   1 if the symbolic link isn't valid.
+#######################################
+function symlink::is_symlink_valid() {
+  if [[ -L "${1}" ]] && return 0 || return 1
+}
