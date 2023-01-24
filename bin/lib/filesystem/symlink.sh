@@ -65,5 +65,5 @@ function symlink::remove() {
 #   1 if the symbolic link isn't valid.
 #######################################
 function symlink::is_symlink_valid() {
-  if [[ -L "${1}" ]] && return 0 || return 1
+  [[ -L "${1}" ]] && return 0 || return 1
 }
