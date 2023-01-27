@@ -67,3 +67,17 @@ function symlink::remove() {
 function symlink::is_symlink_valid() {
   [[ -L "${1}" ]] && return 0 || return 1
 }
+
+#######################################
+# Get the target file for the Symbolic
+# Link.
+#
+# Arguments:
+#   link
+#
+# Outputs:
+#   The file name including path.
+#######################################
+function symlink::target() {
+  readlink -f "${1}"
+}
