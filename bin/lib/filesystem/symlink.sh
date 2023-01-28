@@ -55,6 +55,21 @@ function symlink::remove() {
 }
 
 #######################################
+# Check if the path is a Symbolic Link.
+#
+# Arguments:
+#   link
+#
+# Returns:
+#   0 if the path is a symbolic link.
+#   1 if the path is not a symbolic
+#     link.
+#######################################
+function symlink::is_symlink() {
+  [[ -L "${1}" ]] && return 0 || return 1
+}
+
+#######################################
 # Check if the Symbolic Link is valid.
 #
 # Arguments:
@@ -64,8 +79,8 @@ function symlink::remove() {
 #   0 if the symbolic link is valid.
 #   1 if the symbolic link isn't valid.
 #######################################
-function symlink::is_symlink_valid() {
-  [[ -L "${1}" ]] && return 0 || return 1
+function symlink::is_valid() {
+  [[ -e "${1}" ]] && return 0 || return 1
 }
 
 #######################################
