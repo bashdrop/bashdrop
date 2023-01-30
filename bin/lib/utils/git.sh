@@ -52,7 +52,6 @@ function git::checkout() {
   while [ $# -gt 0 ]; do
     if [[ $1 == *"--"* && $1 == *"="* ]]; then
       local argument="${1/--/}"
-
       IFS='=' read -ra parameter <<< "${argument}"
 
       if [[ "${arguments_list[*]}" =~ ${parameter[0]} ]]; then
@@ -68,6 +67,60 @@ function git::checkout() {
   command=$( cd "${dir}" && git checkout "${branch}" 2>&1 )
 
   [[ -n $command ]] && return 1 || return 0
+}
+
+#######################################
+# Clone Git repository.
+#
+# Arguments:
+#   --branch
+#   --dir
+#   --repo
+#   flags
+#
+# Returns:
+#   1 git clone fails or
+#     if repository directory exists.
+#   0 git clone successful.
+#######################################
+function git::clone() {
+  local arguments_list=("branch" "dir" "repo")
+  local branch
+  local dir
+  local flags="${*}"
+  local git_command
+  local git_command_parameters
+  local repo
+
+  while [ $# -gt 0 ]; do
+    if [[ $1 == *"--"* && $1 == *"="* ]]; then
+      local argument="${1/--/}"
+      IFS='=' read -ra parameter <<< "${argument}"
+
+      if [[ "${arguments_list[*]}" =~ ${parameter[0]} ]]; then
+        flags="${flags/--${argument}/}"
+        declare "${parameter[0]}"="${parameter[1]}"
+      fi
+    fi
+
+    shift
+  done
+
+  unset arguments_list
+
+  IFS=' ' read -ra flags <<< "${flags}"
+
+  if [[ -n "${branch}" ]]; then
+    branch="--branch ${branch}"
+  fi
+
+  git_command_parameters="${flags[*]} ${repo} ${dir} ${branch}"
+
+  IFS=' ' read -ra git_command_parameters <<< "${git_command_parameters}"
+
+  git_command=$(git clone "${git_command_parameters[@]}" 2>&1)
+
+  [[ -n $git_command ]] && return 1 || return 0
 }
 
 #######################################
@@ -92,6 +145,57 @@ function git::fetch() {
   done
 
   _="$( cd "${dir}" && git fetch --all 2>&1 )"
+}
+
+#######################################
+# Get the Git repository name.
+#
+# Global:
+#   GIT_REGEX
+#
+# Arguments:
+#   Git Remote URL
+#
+# Outputs:
+#   Git repository name.
+#######################################
+function git::get_repository_name() {
+  if [[ $1 =~ ${GIT_REGEX} ]]; then
+    console::output "${BASH_REMATCH[5]}"
+  fi
+}
+
+#######################################
+# Get the Git repository user.
+#
+# Global:
+#   GIT_REGEX
+#
+# Arguments:
+#   Git Remote URL
+#
+# Outputs:
+#   Git repository user.
+#######################################
+function git::get_repository_user() {
+  if [[ $1 =~ ${GIT_REGEX} ]]; then
+    console::output "${BASH_REMATCH[4]}"
+  fi
+}
+
+
+#######################################
+# Check if Git Remote URL is valid.
+#
+# Arguments:
+#   Git URL
+#
+# Returns:
+#   0 if Git URL is valid.
+#   1 if Git URL is not valid.
+#######################################
+function git::is_valid_git_url() {
+  [[ $1 =~ ^(https:\/\/|git@) && $1 == *".git"  ]] && return 0 || return 1
 }
 
 #######################################
