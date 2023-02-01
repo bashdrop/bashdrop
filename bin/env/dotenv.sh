@@ -11,7 +11,8 @@
 #   variable
 #
 # Outputs:
-#   Variable value or default value.
+#   The variable value or the default
+#   value.
 #######################################
 function dotenv::get() {
   local arguments_list=("file" "default")

@@ -10,7 +10,7 @@
 #   --dir
 #
 # Outputs:
-#   The checked out branch.
+#   Writes messages to stdout.
 #######################################
 function git::active_branch() {
   local dir
@@ -79,9 +79,9 @@ function git::checkout() {
 #   flags
 #
 # Returns:
-#   1 git clone fails or
-#     if repository directory exists.
-#   0 git clone successful.
+#   0 Git clone successful.
+#   1 Git clone fails or if repository
+#   directory exists.
 #######################################
 function git::clone() {
   local arguments_list=("branch" "dir" "repo")
@@ -157,7 +157,7 @@ function git::fetch() {
 #   Git Remote URL
 #
 # Outputs:
-#   Git repository name.
+#   Writes messages to stdout.
 #######################################
 function git::get_repository_name() {
   if [[ $1 =~ ${GIT_REGEX} ]]; then
@@ -175,7 +175,7 @@ function git::get_repository_name() {
 #   Git Remote URL
 #
 # Outputs:
-#   Git repository user.
+#   Writes messages to stdout.
 #######################################
 function git::get_repository_user() {
   if [[ $1 =~ ${GIT_REGEX} ]]; then
@@ -205,7 +205,7 @@ function git::is_valid_git_url() {
 #   --dir
 #
 # Outputs:
-#   The repository's latest tag.
+#   Writes messages to stdout.
 #######################################
 function git::latest_tag() {
   local commit_hash
@@ -244,8 +244,7 @@ function git::latest_tag() {
 #   --tag
 #
 # Outputs:
-#   The timestamp of the repository's
-#   tag.
+#   Writes messages to stdout.
 #######################################
 function git::tag_timestamp() {
   local arguments_list=("dir" "tag")

@@ -3,7 +3,8 @@
 # Bashdrop about command.
 
 #######################################
-# Display Bashdrop about information.
+# Display the about information for the
+# application.
 #
 # Globals:
 #   APP_NAME
@@ -11,7 +12,7 @@
 #   PROJECT_DIR
 #
 # Outputs:
-#   Writes about information to stdout.
+#   Writes messages to stdout.
 #######################################
 function command::about() {
   local latest_tag
@@ -23,13 +24,14 @@ function command::about() {
   console::output \
     "$(ansi --bold --white "${APP_NAME}") - ${latest_tag} - ${timestamp}"
 
-  console::output --margin-bottom "Path: $(ansi --italic "${PROJECT_DIR}")"
+  console::output --margin-bottom \
+    "Path: $(ansi --italic "${PROJECT_DIR}")"
 
   console::output "See ${GIT_REPOSITORY} for more information."
 }
 
 #######################################
-# Display helpful information for
+# Display the helpful information for
 # the about command.
 #
 # Globals:
@@ -37,8 +39,7 @@ function command::about() {
 #   GIT_REPOSITORY
 #
 # Outputs:
-#   Writes helpful information to
-#   stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::about() {
   local helpful_tips=(

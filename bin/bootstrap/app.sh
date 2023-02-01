@@ -1,9 +1,9 @@
 # shellcheck shell=bash
 #
-# Bashdrop application.
+# Bashdrop bootstrap function.
 
 #######################################
-# The main function for Bashdrop
+# The main function for the Bashdrop
 # application.
 #
 # Globals:
@@ -13,11 +13,11 @@
 #   User input
 #
 # Outputs:
-#   Writes error messages to stdout.
+#   Writes messages to stdout.
 #
 # Returns:
 #   1 if the OS is not supported or
-#     dependencies are not installed.
+#   dependencies are not installed.
 #######################################
 function main() {
   if ! os::is_supported; then

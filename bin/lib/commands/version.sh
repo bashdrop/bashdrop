@@ -3,20 +3,21 @@
 # Bashdrop version command.
 
 #######################################
-# Display the Bashdrop version.
+# Display the application Git version
+# or the active branch.
 #
 # Globals:
 #   PROJECT_DIR
 #
 # Outputs:
-#   Writes current version to stdout.
+#   Writes messages to stdout.
 #######################################
 function command::version() {
   console::output "$(git::active_branch --dir="${PROJECT_DIR}")"
 }
 
 #######################################
-# Display helpful information for
+# Display the helpful information for
 # the version command.
 #
 # Globals:
@@ -25,8 +26,7 @@ function command::version() {
 #   GIT_REPOSITORY
 #
 # Outputs:
-#   Writes helpful information to
-#   stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::version() {
   local helpful_tips=(

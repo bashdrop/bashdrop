@@ -20,7 +20,7 @@ function filesystem::does_file_exists() {
 # Get the file extension for the file.
 #
 # Arguments:
-#   file
+#   File
 #
 # Outputs:
 #   File extension.
@@ -40,7 +40,7 @@ function filesystem::file_extension() {
 # Get the file name for the file.
 #
 # Arguments:
-#   path
+#   Path
 #
 # Outputs:
 #   The file name.
@@ -53,7 +53,7 @@ function filesystem::file_name() {
 # Get the file path from the file.
 #
 # Arguments:
-#   path
+#   Path
 #
 # Outputs:
 #   The file name.
@@ -74,7 +74,7 @@ function filesystem::file_path() {
 # Check if the file is a remote file.
 #
 # Arguments:
-#   file
+#   File
 #
 # Returns:
 #   0 if file is remote.

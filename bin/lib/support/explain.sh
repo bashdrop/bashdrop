@@ -9,7 +9,7 @@
 #   Description
 #
 # Outputs:
-#   Writes the usage to stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::display_aliases() {
   console::output "$(ansi --bold --yellow Aliases:)"
@@ -24,7 +24,7 @@ function explain::display_aliases() {
 #   arguments
 #
 # Outputs:
-#   Writes the arguments to stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::display_arguments() {
   local tabs=15
@@ -44,7 +44,7 @@ function explain::display_arguments() {
 #   Description
 #
 # Outputs:
-#   Writes the description to stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::display_description() {
   console::output "$(ansi --bold --yellow Description:)"
@@ -59,7 +59,7 @@ function explain::display_description() {
 #   Helpful tips
 #
 # Outputs:
-#   Writes the helpful tips to stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::display_helpful_tips() {
   local helpful_tips=("$@")
@@ -67,7 +67,9 @@ function explain::display_helpful_tips() {
   console::output "$(ansi --bold --yellow Help:)"
 
   for (( index=0; index<${#helpful_tips[@]}; index+=2 )); do
-    console::output --margin-bottom "  ${helpful_tips[index]}"
+    console::output --margin-bottom \
+      "  ${helpful_tips[index]}"
+
     console::output --margin-bottom \
       "    $(ansi --green "${helpful_tips[index+1]}")"
   done
@@ -81,8 +83,7 @@ function explain::display_helpful_tips() {
 #   More information URL
 #
 # Outputs:
-#   Writes the more information to
-#   stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::display_more_information() {
   console::output "  See $* for more information."
@@ -95,7 +96,7 @@ function explain::display_more_information() {
 #   Options
 #
 # Outputs:
-#   Writes the options to stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::display_options() {
   local tabs=13
@@ -114,7 +115,7 @@ function explain::display_options() {
 #   Description
 #
 # Outputs:
-#   Writes the usage to stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::display_usage() {
   console::output "$(ansi --bold --yellow Usage:)"

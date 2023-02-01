@@ -1,6 +1,8 @@
 # shellcheck shell=bash
 #
 # Bashdrop internal YAML functions.
+#
+# Based on https://github.com/jasperes/bash-yaml
 
 #######################################
 # Retrieve the yaml elements from a

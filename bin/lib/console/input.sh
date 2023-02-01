@@ -3,8 +3,8 @@
 # Bashdrop internal console interaction functions.
 
 #######################################
-# Get the user input confirmation
-# from the terminal.
+# Get the user input confirmation from
+# the terminal.
 #
 # Arguments:
 #   --default
@@ -63,8 +63,7 @@ function console::ask() {
 }
 
 #######################################
-# Get the user input from the
-# terminal.
+# Get the user input from the terminal.
 #
 # Arguments:
 #   --default

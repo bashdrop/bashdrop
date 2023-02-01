@@ -16,8 +16,8 @@ function progressbar::clear() {
 #   --clear
 #
 # Outputs:
-#   Writes completed progressbar
-#   to stdout.
+#   Writes completed progressbar to
+#   stdout.
 #######################################
 function progressbar::finish() {
   local clear
@@ -41,11 +41,11 @@ function progressbar::finish() {
 # Output a 50% completed progressbar.
 #
 # Arguments:
-#   sleep duration
+#   Sleep duration
 #
 # Outputs:
-#   Writes 50% completed progressbar
-#   to stdout.
+#   Writes 50% completed progressbar to
+#   stdout.
 #######################################
 function progressbar::half() {
   echo -ne '[==============>---------------]  50%\r'
@@ -56,11 +56,11 @@ function progressbar::half() {
 # Output a 0% completed progressbar.
 #
 # Arguments:
-#   sleep duration
+#   Sleep duration
 #
 # Outputs:
-#   Writes 0% completed progressbar
-#   to stdout.
+#   Writes 0% completed progressbar to
+#   stdout.
 #######################################
 function progressbar::start() {
   echo -ne '[>-----------------------------]   0%\r'

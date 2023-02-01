@@ -3,8 +3,8 @@
 # Bashdrop docs command.
 
 #######################################
-# Display the Bashdrop docs
-# information.
+# Display the docs information for the
+# application.
 #
 # Globals:
 #   APP_NAME
@@ -12,7 +12,7 @@
 #   PROJECT_DIR
 #
 # Outputs:
-#   Writes docs information to stdout.
+#   Writes messages to stdout.
 #######################################
 function command::docs() {
   local readme_url
@@ -21,7 +21,8 @@ function command::docs() {
   version="$(git::active_branch --dir="${PROJECT_DIR}")"
   readme_url="${GIT_REPOSITORY}/blob/${version}/README.md"
 
-  console::output --margin-bottom "${APP_NAME} documentation:"
+  console::output --margin-bottom \
+    "${APP_NAME} documentation:"
 
   console::output "$(ansi --bold --white "- Readme")" "${readme_url}"
 
@@ -32,7 +33,7 @@ function command::docs() {
 }
 
 #######################################
-# Display helpful information for
+# Display the helpful information for
 # the docs command.
 #
 # Globals:
@@ -41,8 +42,7 @@ function command::docs() {
 #   GIT_REPOSITORY
 #
 # Outputs:
-#   Writes helpful information to
-#   stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::docs() {
   local helpful_tips=(

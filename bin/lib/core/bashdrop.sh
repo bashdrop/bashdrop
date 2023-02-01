@@ -12,7 +12,7 @@
 #   User input
 #
 # Outputs:
-#   Writes messaging to stdout.
+#   Writes messages to stdout.
 #
 # Returns:
 #   1 if the command is not supported.

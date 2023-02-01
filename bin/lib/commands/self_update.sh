@@ -3,8 +3,8 @@
 # Bashdrop self update command.
 
 #######################################
-# Update Bashdrop to the latest
-# version.
+# Update the application to the latest
+# Git version.
 #
 # Globals:
 #   APP_COMMAND
@@ -13,6 +13,10 @@
 #
 # Outputs:
 #   Writes messages to stdout.
+#
+# Returns:
+#   1 Git is not installed or the user
+#   decides to not update.
 #######################################
 function command::self_update() {
   local latest_tag
@@ -57,7 +61,7 @@ function command::self_update() {
 }
 
 #######################################
-# Display helpful information for
+# Display the helpful information for
 # the self-update command.
 #
 # Globals:
@@ -66,8 +70,7 @@ function command::self_update() {
 #   GIT_REPOSITORY
 #
 # Outputs:
-#   Writes helpful information to
-#   stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::self_update() {
   local helpful_tips=(

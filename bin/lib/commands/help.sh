@@ -3,8 +3,8 @@
 # Bashdrop help command.
 
 #######################################
-# Display the Bashdrop help
-# information.
+# Display the help information for the
+# application.
 #
 # Globals:
 #   APP_COMMAND
@@ -13,7 +13,7 @@
 #   User input
 #
 # Outputs:
-#   Writes help information to stdout.
+#   Writes messages to stdout.
 #
 # Returns:
 #   1 if the command is not supported.
@@ -43,7 +43,7 @@ function command::help() {
 }
 
 #######################################
-# Display helpful information for
+# Display the helpful information for
 # the help command.
 #
 # Globals:
@@ -51,8 +51,7 @@ function command::help() {
 #   GIT_REPOSITORY
 #
 # Outputs:
-#   Writes helpful information to
-#   stdout.
+#   Writes messages to stdout.
 #######################################
 function explain::help() {
   local arguments=(

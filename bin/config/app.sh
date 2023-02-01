@@ -10,7 +10,7 @@ readonly APP_NAME="Bashdrop"
 export APP_NAME
 
 #######################################
-# App Shell command
+# App Shell Command
 #######################################
 
 readonly APP_COMMAND="app"

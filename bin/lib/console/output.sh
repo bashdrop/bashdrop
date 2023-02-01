@@ -6,6 +6,10 @@
 # Output the error message.
 #
 # Arguments:
+#   --margin-bottom
+#   --margin-top
+#   --no-trailing
+#   --overwrite
 #   Message
 #
 # Outputs:
@@ -19,6 +23,10 @@ function console::error() {
 # Output the info message.
 #
 # Arguments:
+#   --margin-bottom
+#   --margin-top
+#   --no-trailing
+#   --overwrite
 #   Message
 #
 # Outputs:
@@ -42,6 +50,10 @@ function console::newline() {
 # Output the notice message.
 #
 # Arguments:
+#   --margin-bottom
+#   --margin-top
+#   --no-trailing
+#   --overwrite
 #   Message
 #
 # Outputs:
@@ -55,6 +67,10 @@ function console::notice() {
 # Output the message.
 #
 # Arguments:
+#   --margin-bottom
+#   --margin-top
+#   --no-trailing
+#   --overwrite
 #   Message
 #
 # Outputs:
@@ -108,6 +124,10 @@ function console::output() {
 # Output the question message.
 #
 # Arguments:
+#   --margin-bottom
+#   --margin-top
+#   --no-trailing
+#   --overwrite
 #   Message
 #
 # Outputs:
@@ -121,6 +141,10 @@ function console::question() {
 # Output the warning message.
 #
 # Arguments:
+#   --margin-bottom
+#   --margin-top
+#   --no-trailing
+#   --overwrite
 #   Message
 #
 # Outputs:
