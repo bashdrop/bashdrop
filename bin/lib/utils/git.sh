@@ -17,10 +17,7 @@ function git::active_branch() {
 
   while [ $# -gt 0 ]; do
     if [[ "${1}" == *"--dir="* ]]; then
-      local argument="${1/--/}"
-      IFS='=' read -ra parameter <<< "${argument}"
-
-      declare "${parameter[0]}"="${parameter[1]}"
+      dir="${1/--dir=/}"
     fi
 
     shift
@@ -135,10 +132,7 @@ function git::fetch() {
 
   while [ $# -gt 0 ]; do
     if [[ "${1}" == *"--dir="* ]]; then
-      local argument="${1/--/}"
-      IFS='=' read -ra parameter <<< "${argument}"
-
-      declare "${parameter[0]}"="${parameter[1]}"
+      dir="${1/--dir=/}"
     fi
 
     shift
@@ -213,10 +207,7 @@ function git::latest_tag() {
 
   while [ $# -gt 0 ]; do
     if [[ "${1}" == *"--dir="* ]]; then
-      local argument="${1/--/}"
-      IFS='=' read -ra parameter <<< "${argument}"
-
-      declare "${parameter[0]}"="${parameter[1]}"
+      dir="${1/--dir=/}"
     fi
 
     shift

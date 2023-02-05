@@ -166,19 +166,12 @@ function help::display_useful_tips() {
   local command_name
 
   while [ $# -gt 0 ]; do
-    if [[ "${1}" == *"--"* && "${1}" == *"="* ]]; then
-      local argument="${1/--/}"
-      IFS='=' read -ra parameter <<< "${argument}"
-
-      if [[ "${arguments_list[*]}" =~ ${parameter[0]} ]]; then
-        declare "${parameter[0]}"="${parameter[1]}"
-      fi
+    if [[ "${1}" == *"--command_name"* ]]; then
+      command_name="${1/--command_name=/}"
     fi
 
     shift
   done
-
-  unset arguments_list
 
   console::output --margin-top "More configuration info:" \
     "$(ansi --bold --white "${command_name} help [command]")"

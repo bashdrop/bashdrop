@@ -77,10 +77,7 @@ function console::input() {
 
   while [ $# -gt 0 ]; do
     if [[ "${1}" == *"--default="* ]]; then
-      local argument="${1/--/}"
-      IFS='=' read -ra parameter <<< "${argument}"
-
-      declare "${parameter[0]}"="${parameter[1]}"
+      default="${1/--default=/}"
     fi
 
     shift
