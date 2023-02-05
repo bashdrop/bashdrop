@@ -16,7 +16,7 @@ function git::active_branch() {
   local dir
 
   while [ $# -gt 0 ]; do
-    if [[ $1 == *"--dir="* ]]; then
+    if [[ "${1}" == *"--dir="* ]]; then
       local argument="${1/--/}"
       IFS='=' read -ra parameter <<< "${argument}"
 
@@ -50,7 +50,7 @@ function git::checkout() {
   local dir
 
   while [ $# -gt 0 ]; do
-    if [[ $1 == *"--"* && $1 == *"="* ]]; then
+    if [[ "${1}" == *"--"* && "${1}" == *"="* ]]; then
       local argument="${1/--/}"
       IFS='=' read -ra parameter <<< "${argument}"
 
@@ -93,7 +93,7 @@ function git::clone() {
   local repo
 
   while [ $# -gt 0 ]; do
-    if [[ $1 == *"--"* && $1 == *"="* ]]; then
+    if [[ "${1}" == *"--"* && "${1}" == *"="* ]]; then
       local argument="${1/--/}"
       IFS='=' read -ra parameter <<< "${argument}"
 
@@ -134,7 +134,7 @@ function git::fetch() {
   local dir
 
   while [ $# -gt 0 ]; do
-    if [[ $1 == *"--dir="* ]]; then
+    if [[ "${1}" == *"--dir="* ]]; then
       local argument="${1/--/}"
       IFS='=' read -ra parameter <<< "${argument}"
 
@@ -160,7 +160,7 @@ function git::fetch() {
 #   Writes messages to stdout.
 #######################################
 function git::get_repository_name() {
-  if [[ $1 =~ ${GIT_REGEX} ]]; then
+  if [[ "${1}" =~ ${GIT_REGEX} ]]; then
     console::output "${BASH_REMATCH[5]}"
   fi
 }
@@ -178,7 +178,7 @@ function git::get_repository_name() {
 #   Writes messages to stdout.
 #######################################
 function git::get_repository_user() {
-  if [[ $1 =~ ${GIT_REGEX} ]]; then
+  if [[ "${1}" =~ ${GIT_REGEX} ]]; then
     console::output "${BASH_REMATCH[4]}"
   fi
 }
@@ -195,7 +195,7 @@ function git::get_repository_user() {
 #   1 if Git URL is not valid.
 #######################################
 function git::is_valid_git_url() {
-  [[ $1 =~ ^(https:\/\/|git@) && $1 == *".git"  ]] && return 0 || return 1
+  [[ "${1}" =~ ^(https:\/\/|git@) && "${1}" == *".git"  ]] && return 0 || return 1
 }
 
 #######################################
@@ -212,7 +212,7 @@ function git::latest_tag() {
   local dir
 
   while [ $# -gt 0 ]; do
-    if [[ $1 == *"--dir="* ]]; then
+    if [[ "${1}" == *"--dir="* ]]; then
       local argument="${1/--/}"
       IFS='=' read -ra parameter <<< "${argument}"
 
@@ -252,7 +252,7 @@ function git::tag_timestamp() {
   local tag
 
   while [ $# -gt 0 ]; do
-    if [[ $1 == *"--"* && $1 == *"="* ]]; then
+    if [[ "${1}" == *"--"* && "${1}" == *"="* ]]; then
       local argument="${1/--/}"
       IFS='=' read -ra parameter <<< "${argument}"
 

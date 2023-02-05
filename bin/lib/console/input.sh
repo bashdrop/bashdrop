@@ -25,7 +25,7 @@ function console::ask() {
   local reply
 
   while [ $# -gt 0 ]; do
-    if [[ $1 == *"--"* && $1 == *"="* ]]; then
+    if [[ "${1}" == *"--"* && "${1}" == *"="* ]]; then
       local argument="${1/--/}"
       IFS='=' read -ra parameter <<< "${argument}"
 
@@ -76,7 +76,7 @@ function console::input() {
   local input
 
   while [ $# -gt 0 ]; do
-    if [[ $1 == *"--default="* ]]; then
+    if [[ "${1}" == *"--default="* ]]; then
       local argument="${1/--/}"
       IFS='=' read -ra parameter <<< "${argument}"
 

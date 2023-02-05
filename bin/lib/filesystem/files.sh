@@ -81,5 +81,5 @@ function filesystem::file_path() {
 #   1 if file is not remote.
 #######################################
 function filesystem::is_remote_file() {
-  [[ $1 =~ ^(http|https|git)(:\/\/|@) ]] && return 0 || return 1
+  [[ "${1}" =~ ^(http|https|git)(:\/\/|@) ]] && return 0 || return 1
 }
