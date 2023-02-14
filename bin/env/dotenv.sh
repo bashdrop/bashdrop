@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 #
-# Bashdrop DotEnv function.
+# Bashdrop DotEnv functions.
 
 #######################################
 # Load DotEnv file.
