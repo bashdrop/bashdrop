@@ -30,7 +30,10 @@ readonly BIN_DIR
 # shellcheck source=/dev/null
 source "${BIN_DIR}/env/dotenv.sh"
 
-dotenv::load "$( dirname "${BIN_DIR}" )/.env"
+DOTENV="$( dirname "${BIN_DIR}" )/.env"
+readonly DOTENV
+
+dotenv::load "${DOTENV}"
 
 #######################################
 # Define Global Constant
