@@ -3,6 +3,28 @@
 # Bashdrop DotEnv function.
 
 #######################################
+# Load DotEnv file.
+#
+# Arguments:
+#   DotEnv File
+#######################################
+function dotenv::load() {
+  local file="${1}"
+  local example="${file}.example"
+
+  if [ ! -f "${file}" ]; then
+    if [ ! -f "${example}" ]; then
+      return
+    fi
+
+    cp "${example}" "${file}"
+  fi
+
+  # shellcheck source=/dev/null
+  source "${file}"
+}
+
+#######################################
 # Retrieve the environment variable.
 #
 # Arguments:
@@ -17,8 +39,8 @@
 function dotenv::get() {
   local arguments_list=("file" "default")
   local default
-  local file=".env"
-  local variable=$*
+  local file
+  local variable="${*}"
 
   while [ $# -gt 0 ]; do
     if [[ "${1}" == *"--"* && "${1}" == *"="* ]]; then
@@ -36,20 +58,17 @@ function dotenv::get() {
 
   unset arguments_list
 
-  if [ -f "${file}" ]; then
-    # Strip out whitespaces
-    variable="${variable//[[:blank:]]/}"
+  if [[ -z "${file}" ]]; then
+    dotenv::load "${file}"
+  fi
 
-    # shellcheck source=/dev/null
-    source "${file}"
+  # Strip out whitespaces
+  variable="${variable//[[:blank:]]/}"
 
-    if [[ -z "${!variable}" ]]; then
-      echo "${default}"
-    else
-      # Replace single quotes for double qoutes to support JSON variables.
-      echo "${!variable//\'/\"/}"
-    fi
-  else
+  if [[ -z "${!variable}" ]]; then
     echo "${default}"
+  else
+    # Replace single quotes for double qoutes to support JSON variables.
+    echo "${!variable//\'/\"/}"
   fi
 }
