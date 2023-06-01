@@ -160,6 +160,40 @@ function git::get_repository_name() {
 }
 
 #######################################
+# Get the Git Remote URL for a
+# repository.
+#
+# Arguments:
+#   --dir
+#   --remote
+#
+# Outputs:
+#   Git Remote Url.
+#######################################
+function git::get_repository_remote_url() {
+  local arguments_list=("dir" "remote")
+  local dir
+  local remote=origin
+
+  while [ $# -gt 0 ]; do
+    if [[ $1 == *"--"* && $1 == *"="* ]]; then
+      local argument="${1/--/}"
+      IFS='=' read -ra parameter <<< "${argument}"
+
+      if [[ "${arguments_list[*]}" =~ ${parameter[0]} ]]; then
+        declare "${parameter[0]}"="${parameter[1]}"
+      fi
+    fi
+
+    shift
+  done
+
+  unset arguments_list
+
+  console::output "$(cd "${dir}" && git remote get-url --all "${remote}")"
+}
+
+#######################################
 # Get the Git repository user.
 #
 # Global:
@@ -176,7 +210,6 @@ function git::get_repository_user() {
     console::output "${BASH_REMATCH[4]}"
   fi
 }
-
 
 #######################################
 # Check if Git Remote URL is valid.
@@ -224,6 +257,39 @@ function git::latest_tag() {
   else
     console::output "unreleased"
   fi
+}
+
+#######################################
+# Get the timestamp of the repository's
+# tag.
+#
+# Arguments:
+#   --dir
+#   --git_url
+#   --remote
+#######################################
+function git::set_repository_remote_url() {
+  local arguments_list=("dir" "git_url" "remote")
+  local dir
+  local git_url
+  local remote=origin
+
+  while [ $# -gt 0 ]; do
+    if [[ $1 == *"--"* && $1 == *"="* ]]; then
+      local argument="${1/--/}"
+      IFS='=' read -ra parameter <<< "${argument}"
+
+      if [[ "${arguments_list[*]}" =~ ${parameter[0]} ]]; then
+        declare "${parameter[0]}"="${parameter[1]}"
+      fi
+    fi
+
+    shift
+  done
+
+  unset arguments_list
+
+  _="$( cd "${dir}" && git remote add "${remote}" "${git_url}" 2>&1 )"
 }
 
 #######################################
