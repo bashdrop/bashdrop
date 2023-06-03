@@ -3,6 +3,21 @@
 # Bashdrop internal help (usage) functions.
 
 #######################################
+# Display the help section title.
+#
+# Arguments:
+#   Section
+#
+# Outputs:
+#   Writes the section title to stdout.
+#######################################
+function help::add_section() {
+  help::clear_commands
+
+  console::output "$(ansi --yellow "${1}:")"
+}
+
+#######################################
 # Store the command and description for
 # help output.
 #
@@ -39,6 +54,16 @@ function help::add_command() {
   fi
 
   HELP_COMMAND_LIST+=("${command}" "${description}")
+}
+
+#######################################
+# Clear existing commands.
+#
+# Globals:
+#   HELP_COMMAND_LIST
+#######################################
+function help::clear_commands() {
+  unset HELP_COMMAND_LIST
 }
 
 #######################################
@@ -88,15 +113,29 @@ function help::contribute() {
 #   HELP_COMMAND_TEXT_MAX_LENGTH
 #   HELP_DESCRIPTION_SPACING
 #
+# Arguments:
+#   --enable-title
+#
 # Outputs:
 #   Writes messages to stdout.
 #######################################
 function help::display_commands() {
+  local enable_title=false
   local tabs=0
+
+  while [ $# -gt 0 ]; do
+    if [[ "${1}" == *"--enable-title"* ]]; then
+      enable_title=true
+    fi
+
+    shift
+  done
 
   tabs="$((HELP_COMMAND_TEXT_MAX_LENGTH + HELP_DESCRIPTION_SPACING))"
 
-  console::output "$(ansi --bold --yellow "Available commands:")"
+  if [[ "${enable_title}" == true ]]; then
+    console::output "$(ansi --bold --yellow "Available commands:")"
+  fi
 
   printf "  $(ansi --green %-"${tabs}"s) %s\n" "${HELP_COMMAND_LIST[@]}"
 }

@@ -8,6 +8,7 @@
 #
 # Globals:
 #   APP_COMMAND
+#   MODULES_LIST
 #
 # Arguments:
 #   User input
@@ -20,12 +21,23 @@
 #######################################
 function command::help() {
   if [ $# == 0 ]; then
-    explain::command_help
+    explain::help
 
     exit 0
   fi
 
   local explain_command="explain::${1//-/_}"
+
+  if [[ $( type -t "${explain_command}" ) != function ]]; then
+    module="$(cut -d':' -f1 <<< "${1}")"
+    condition="(^|[[:space:]])${module}($|[[:space:]])"
+
+    if [[ "${MODULES_LIST[*]}" =~ ${condition} ]]; then
+      module::load "${module}"
+      explain_command="${1//:/::explain_}"
+      explain_command="${explain_command//-/_}"
+    fi
+  fi
 
   if [[ $( type -t "${explain_command}" ) != function ]]; then
     console::error --margin-bottom \
