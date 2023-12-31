@@ -24,7 +24,7 @@ Bashdrop is a micro-framework that provides a starting point for your console ap
 
 ## Disclaimer
 
-> **Note**  
+> [!WARNING]  
 > This project is a **work-in-progress**. Code and documentation are currently under development and are subject to change.
 
 ## Getting Started
